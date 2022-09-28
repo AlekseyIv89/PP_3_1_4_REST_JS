@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+    <style>
+        .center {
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <h1>Список пользователей</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Возраст</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${users.isEmpty()}">
+                    <td colspan="4" align="center">Ни один пользователь не найден</td>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.getId()}">ID</td>
+                    <td th:text="${user.getName()}">Имя</td>
+                    <td th:text="${user.getSurname()}">Фамилия</td>
+                    <td th:text="${user.getAge()}">Возраст</td>
+                    <td>
+                        <form method="GET" th:action="@{/{id}/edit(id=${user.getId()})}">
+                            <input type="submit" value="Редактировать">
+                        </form>
+                    </td>
+                    <td>
+                        <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                            <input type="submit" value="Удалить"/>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br/>
+
+        <form method="GET" action="/new">
+            <input type="submit" value="Добавить пользователя"/>
+        </form>
+    </div>
+</body>
+</html>
