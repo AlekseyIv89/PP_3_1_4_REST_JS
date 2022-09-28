@@ -14,28 +14,27 @@
 </head>
 <body>
     <div class="center">
+        <h3><a href="/">На главную</a></h3>
         <h1>Список пользователей</h1>
 
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Возраст</th>
+                    <th>Login</th>
+                    <th>Email</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:if="${users.isEmpty()}">
-                    <td colspan="4" align="center">Ни один пользователь не найден</td>
+                    <td colspan="3" align="center">Ни один пользователь не найден</td>
                 </tr>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.getId()}">ID</td>
-                    <td th:text="${user.getName()}">Имя</td>
-                    <td th:text="${user.getSurname()}">Фамилия</td>
-                    <td th:text="${user.getAge()}">Возраст</td>
+                    <td th:text="${user.getUserLogin()}">Login</td>
+                    <td th:text="${user.getEmail()}">E-mail</td>
                     <td>
                         <form method="GET" th:action="@{/{id}/edit(id=${user.getId()})}">
                             <input type="submit" value="Редактировать">
@@ -52,7 +51,7 @@
 
         <br/>
 
-        <form method="GET" action="/new">
+        <form method="GET" action="/admin/new">
             <input type="submit" value="Добавить пользователя"/>
         </form>
     </div>

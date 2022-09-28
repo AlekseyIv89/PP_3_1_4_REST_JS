@@ -14,25 +14,22 @@
 </head>
 <body>
     <div class="center">
-        <h3><a href="/">На главную</a></h3>
+        <h3><a href="/admin">В админку</a></h3>
 
         <form th:method="POST" th:action="@{/}" th:accept-charset="UTF-8" th:object="${user}">
             <table>
                 <tbody>
                     <tr>
-                        <td><label for="name">Имя</label></td>
-                        <td><input th:field="*{name}" type="text" id="name"/></td>
-                        <td style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                        <td><label for="login">Login</label></td>
+                        <td><input th:field="*{userLogin}" type="text" id="login"/></td>
                     </tr>
                     <tr>
-                        <td><label for="surname">Фамилия</label></td>
-                        <td><input th:field="*{surname}" type="text" id="surname"/></td>
-                        <td style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</td>
+                        <td><label for="email">E-mail</label></td>
+                        <td><input th:field="*{email}" type="text" id="email"/></td>
                     </tr>
                     <tr>
-                        <td><label for="age">Возраст</label></td>
-                        <td><input th:field="*{age}" type="text" id="age"/></td>
-                        <td style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
+                        <td><label for="password">Password</label></td>
+                        <td><input th:field="*{userPassword}" type="text" id="password"/></td>
                     </tr>
                     <tr>
                         <td></td>

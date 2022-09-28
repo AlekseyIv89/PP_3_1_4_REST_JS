@@ -30,7 +30,7 @@ public class AdminController {
     @PostMapping()
     public String createUser(@ModelAttribute("user") User user) {
         userService.createUser(user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
@@ -42,12 +42,12 @@ public class AdminController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") long id) {
         userService.editUser(id, user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 }
