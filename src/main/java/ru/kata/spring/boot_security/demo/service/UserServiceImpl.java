@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         User admin = new User("admin",
                 "admin@admin.ru",
                 "admin",
-                Stream.of(new Role("ADMIN")).collect(Collectors.toSet()));
+                Stream.of(new Role("ADMIN"), new Role("USER")).collect(Collectors.toSet()));
 
         createUser(user);
         createUser(admin);
