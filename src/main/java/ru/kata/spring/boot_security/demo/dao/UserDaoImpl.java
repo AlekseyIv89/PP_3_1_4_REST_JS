@@ -1,28 +1,28 @@
 package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserDaoImpl implements UserDao {
     @PersistenceContext(unitName = "entityManagerFactory")
     public EntityManager entityManager;
 
     @Override
     public List<User> getAllUsers() {
-//        return entityManager.createQuery("select u from User u", User.class).getResultList();
-        return new ArrayList<>();
+        return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
     @Override
     public void createUser(User user) {
-//        entityManager.persist(user);
+        entityManager.persist(user);
     }
 
     @Override
@@ -31,21 +31,25 @@ public class UserDaoImpl implements UserDao {
 //                .setParameter("id", id);
 //        //т.к. при getSingleResult() может быть NoResultException
 //        return typedQuery.getResultList().stream().findAny().orElse(null);
-//        return entityManager.find(User.class, id);
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public User getUserByName(String loginName) {
         return new User();
     }
 
     @Override
     public void editUser(long id, User user) {
-//        User editedUser = getUser(id);
-//        editedUser.setUserLogin(user.getUserLogin());
-//        editedUser.setEmail(user.getEmail());
-//        editedUser.setUserPassword(user.getUserPassword());
-//        entityManager.merge(editedUser);
+        User editedUser = getUser(id);
+        editedUser.setUserLogin(user.getUserLogin());
+        editedUser.setEmail(user.getEmail());
+        editedUser.setUserPassword(user.getUserPassword());
+        entityManager.merge(editedUser);
     }
 
     @Override
     public void deleteUser(long id) {
-//        entityManager.remove(getUser(id));
+        entityManager.remove(getUser(id));
     }
 }
