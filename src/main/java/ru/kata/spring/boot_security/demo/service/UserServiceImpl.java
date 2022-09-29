@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,15 +18,14 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
-
         User user = new User("user",
                 "user@user.ru",
-                "user",
+                "{noop}user",
                 Stream.of(new Role("USER")).collect(Collectors.toSet()));
 
         User admin = new User("admin",
                 "admin@admin.ru",
-                "admin",
+                "{noop}admin",
                 Stream.of(new Role("ADMIN"), new Role("USER")).collect(Collectors.toSet()));
 
         createUser(user);
