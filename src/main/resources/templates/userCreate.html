@@ -10,13 +10,20 @@
             width: 400px;
             margin: 0 auto;
         }
+        .menu-main li {
+            display: inline-block;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="center">
-        <h3><a href="/admin">В админку</a></h3>
+        <ul class="menu-main">
+            <li><h3><a th:href="@{/admin}">Назад</a></h3></li>
+            <li><h3><a th:href="@{/logout}">Выход</a></h3></li>
+        </ul>
 
-        <form th:method="POST" th:action="@{/}" th:accept-charset="UTF-8" th:object="${user}">
+        <form th:method="POST" th:action="@{/admin/}" th:accept-charset="UTF-8" th:object="${user}">
             <table>
                 <tbody>
                     <tr>

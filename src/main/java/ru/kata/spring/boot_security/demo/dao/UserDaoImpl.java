@@ -6,11 +6,9 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-@Transactional
 public class UserDaoImpl implements UserDao {
     @PersistenceContext(unitName = "entityManagerFactory")
     public EntityManager entityManager;
@@ -21,16 +19,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @Transactional
     public void createUser(User user) {
         entityManager.persist(user);
     }
 
     @Override
     public User getUser(long id) {
-//        TypedQuery<User> typedQuery = entityManager.createQuery("select u from User u where u.id = :id", User.class)
-//                .setParameter("id", id);
-//        //т.к. при getSingleResult() может быть NoResultException
-//        return typedQuery.getResultList().stream().findAny().orElse(null);
         return entityManager.find(User.class, id);
     }
 

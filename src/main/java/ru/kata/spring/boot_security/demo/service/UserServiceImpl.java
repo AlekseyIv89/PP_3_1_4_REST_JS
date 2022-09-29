@@ -19,18 +19,21 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
 
-//        User user = new User("user",
-//                "user@user.ru",
-//                "user",
-//                Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
-//
-//        User admin = new User("admin",
-//                "admin@admin.ru",
-//                "admin",
-//                Stream.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")).collect(Collectors.toSet()));
-//
-//        createUser(user);
-//        createUser(admin);
+        //
+        if (userDao.getAllUsers().size() < 2) {
+            User user = new User("user",
+                    "user@user.ru",
+                    "user",
+                    Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
+
+            User admin = new User("admin",
+                    "admin@admin.ru",
+                    "admin",
+                    Stream.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")).collect(Collectors.toSet()));
+
+            createUser(user);
+            createUser(admin);
+        }
     }
 
     @Override

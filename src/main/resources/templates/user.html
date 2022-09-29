@@ -6,6 +6,8 @@
     <title>Spring Security Example</title>
 </head>
 <body>
+    <h3><a th:href="@{/logout}">Выход</a></h3>
+
     <h1 th:text="'User ' + ${user.getUsername()} + ', welcome spring boot security page!'">
         User, welcome spring boot security page!
     </h1>

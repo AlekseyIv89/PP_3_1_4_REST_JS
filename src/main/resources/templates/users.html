@@ -10,11 +10,18 @@
             width: 400px;
             margin: 0 auto;
         }
+        .menu-main li {
+            display: inline-block;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="center">
-        <h3><a href="/">На главную</a></h3>
+    <div class="center"><ul class="menu-main">
+        <li><h3><a th:href="@{/}">На главную</a></h3></li>
+        <li><h3><a th:href="@{/logout}">Выход</a></h3></li>
+    </ul>
+
         <h1>Список пользователей</h1>
 
         <table>
@@ -36,12 +43,12 @@
                     <td th:text="${user.getUserLogin()}">Login</td>
                     <td th:text="${user.getEmail()}">E-mail</td>
                     <td>
-                        <form method="GET" th:action="@{/{id}/edit(id=${user.getId()})}">
+                        <form method="GET" th:action="@{/admin/{id}/edit(id=${user.getId()})}">
                             <input type="submit" value="Редактировать">
                         </form>
                     </td>
                     <td>
-                        <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                        <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
                             <input type="submit" value="Удалить"/>
                         </form>
                     </td>
