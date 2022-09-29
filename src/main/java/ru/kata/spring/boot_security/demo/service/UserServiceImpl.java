@@ -18,18 +18,19 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
-        User user = new User("user",
-                "user@user.ru",
-                "{noop}user",
-                Stream.of(new Role("USER")).collect(Collectors.toSet()));
 
-        User admin = new User("admin",
-                "admin@admin.ru",
-                "{noop}admin",
-                Stream.of(new Role("ADMIN"), new Role("USER")).collect(Collectors.toSet()));
-
-        createUser(user);
-        createUser(admin);
+//        User user = new User("user",
+//                "user@user.ru",
+//                "user",
+//                Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
+//
+//        User admin = new User("admin",
+//                "admin@admin.ru",
+//                "admin",
+//                Stream.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")).collect(Collectors.toSet()));
+//
+//        createUser(user);
+//        createUser(admin);
     }
 
     @Override

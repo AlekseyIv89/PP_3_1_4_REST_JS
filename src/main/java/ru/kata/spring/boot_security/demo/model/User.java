@@ -87,7 +87,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
+        return getRoles();
     }
 
     @Override
@@ -118,5 +118,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        String s = String.format("User id=%d, login=%s, password=%s, email=%s\n", id, userLogin, userPassword, email);
+        for (Role role : getRoles()) {
+            s += role.getRole() + " ";
+        }
+        return s + "\n";
     }
 }
