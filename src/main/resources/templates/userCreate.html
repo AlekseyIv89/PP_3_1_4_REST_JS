@@ -41,7 +41,7 @@
                     <tr>
                         <td><label for="roles">Roles</label></td>
                         <td>
-                            <select th:field="*{roles}" id="roles" required="required" multiple size="2">
+                            <select th:field="*{roles}" id="roles" required multiple size="2">
                                 <option th:each="role : ${T(ru.kata.spring.boot_security.demo.model.RolesEnum).values()}"
                                         th:value="${role}"
                                         th:text="${role}">

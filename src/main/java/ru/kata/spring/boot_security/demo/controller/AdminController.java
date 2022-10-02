@@ -33,7 +33,6 @@ public class AdminController {
 
     @PostMapping()
     public String createUser(@ModelAttribute("user") User user) {
-        user.setRoles(Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
         userService.createUser(user);
         return "redirect:/admin";
     }

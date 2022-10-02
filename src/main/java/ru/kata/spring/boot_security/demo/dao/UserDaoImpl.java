@@ -44,6 +44,7 @@ public class UserDaoImpl implements UserDao {
         editedUser.setUserLogin(user.getUserLogin());
         editedUser.setEmail(user.getEmail());
         editedUser.setUserPassword(user.getUserPassword());
+        editedUser.setRoles(user.getRoles());
         entityManager.merge(editedUser);
     }
 

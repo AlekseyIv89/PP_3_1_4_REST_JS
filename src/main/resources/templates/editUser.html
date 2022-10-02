@@ -39,6 +39,18 @@
                         <td><input th:field="*{userPassword}" type="text" id="password"/></td>
                     </tr>
                     <tr>
+                        <td><label for="roles">Roles</label></td>
+                        <td>
+                            <select th:field="*{roles}" id="roles" required multiple size="2">
+                                <option th:each="role : ${T(ru.kata.spring.boot_security.demo.model.RolesEnum).values()}"
+                                        th:value="${role}"
+                                        th:text="${role}">
+                                    Roles
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td></td>
                         <td><input type="submit" value="Обновить"/></td>
                     </tr>

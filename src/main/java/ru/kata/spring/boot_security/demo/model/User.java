@@ -116,13 +116,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    @Override
-    public String toString() {
-        String s = String.format("User id=%d, login=%s, password=%s, email=%s\n", id, userLogin, userPassword, email);
-        for (Role role : getRoles()) {
-            s += role.getRole() + " ";
-        }
-        return s + "\n";
-    }
 }
