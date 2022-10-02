@@ -23,7 +23,7 @@
             <li><h3><a th:href="@{/logout}">Выход</a></h3></li>
         </ul>
 
-        <form th:method="POST" th:action="@{/admin/}" th:accept-charset="UTF-8" th:object="${user}">
+        <form th:method="POST" th:action="@{/admin/}" th:object="${user}">
             <table>
                 <tbody>
                     <tr>
@@ -37,6 +37,18 @@
                     <tr>
                         <td><label for="password">Password</label></td>
                         <td><input th:field="*{userPassword}" type="text" id="password"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="roles">Roles</label></td>
+                        <td>
+                            <select th:field="*{roles}" id="roles" multiple required size="2">
+                                <option th:each="role : ${T(ru.kata.spring.boot_security.demo.model.RolesEnum).values()}"
+                                        th:value="${role}"
+                                        th:text="${role}">
+                                    Role
+                                </option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>

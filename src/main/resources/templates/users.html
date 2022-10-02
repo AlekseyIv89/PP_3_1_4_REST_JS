@@ -30,18 +30,20 @@
                     <th>ID</th>
                     <th>Login</th>
                     <th>Email</th>
+                    <th>Roles</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:if="${users.isEmpty()}">
-                    <td colspan="3" align="center">Ни один пользователь не найден</td>
+                    <td colspan="4" align="center">Ни один пользователь не найден</td>
                 </tr>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.getId()}">ID</td>
                     <td th:text="${user.getUserLogin()}">Login</td>
                     <td th:text="${user.getEmail()}">E-mail</td>
+                    <td th:text="${#strings.listJoin(user.roles, ' ')}" style="white-space: nowrap">Roles</td>
                     <td>
                         <form method="GET" th:action="@{/admin/{id}/edit(id=${user.getId()})}">
                             <input type="submit" value="Редактировать">
