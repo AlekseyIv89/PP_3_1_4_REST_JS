@@ -33,8 +33,6 @@ public class UserDaoImpl implements UserDao {
     public User getUserByEmail(String email) {
         User user = entityManager.createQuery("select u from User u where u.email = :email", User.class)
                 .setParameter("email", email).getSingleResult();
-
-        System.out.println(user);
         return user;
     }
 
