@@ -30,21 +30,25 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Login</th>
-                    <th>Email</th>
-                    <th>Roles</th>
+                    <th class="one-line">ID</th>
+                    <th class="one-line">First Name</th>>
+                    <th class="one-line">Last Name</th>>
+                    <th class="one-line">Age</th>
+                    <th class="one-line">Email</th>
+                    <th class="one-line">Roles</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:if="${users.isEmpty()}">
-                    <td colspan="4" align="center">Ни один пользователь не найден</td>
+                    <td colspan="6" align="center">Ни один пользователь не найден</td>
                 </tr>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.getId()}">ID</td>
-                    <td th:text="${user.getUserLogin()}">Login</td>
+                    <td th:text="${user.getFirstName()}">First Name</td>
+                    <td th:text="${user.getLastName()}">Last Name</td>
+                    <td th:text="${user.getAge()}">Login</td>
                     <td th:text="${user.getEmail()}">E-mail</td>
                     <td class="one-line" th:text="${#strings.listJoin(user.roles, ' ')}">Roles</td>
                     <td>

@@ -10,7 +10,7 @@ public interface UserService extends UserDetailsService {
     List<User> getAllUsers();
     void createUser(User user);
     User getUser(long id);
-    User getUserByName(String loginName);
+    User getUserByEmail(String email);
     void editUser(long id, User user);
     void deleteUser(long id);
 }

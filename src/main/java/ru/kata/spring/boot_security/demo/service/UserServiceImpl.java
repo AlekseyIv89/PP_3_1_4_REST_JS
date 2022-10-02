@@ -20,14 +20,19 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
 
         //Начальное добавление USER и ADMIN в БД
+        //В качестве логина используется e-mail
         if (userDao.getAllUsers().size() < 2) {
-            User user = new User("user",
-                    "user@user.ru",
+            User user = new User("Petr",
+                    "Petrov",
+                    25,
+                    "user@mail.ru",
                     "user",
                     Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
 
-            User admin = new User("admin",
-                    "admin@admin.ru",
+            User admin = new User("Aleksey",
+                    "Ivanov",
+                    33,
+                    "admin@mail.ru",
                     "admin",
                     Stream.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")).collect(Collectors.toSet()));
 
@@ -56,8 +61,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserByName(String loginName) {
-        return userDao.getUserByName(loginName);
+    public User getUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
     }
 
     @Override
@@ -74,6 +79,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return getUserByName(username);
+        return getUserByEmail(username);
     }
 }

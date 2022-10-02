@@ -3,14 +3,11 @@ package ru.kata.spring.boot_security.demo.model;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -19,13 +16,14 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 32)
-    private String userLogin;
+    private String firstName;
 
-    @Column
+    private String lastName;
+
+    private int age;
+
     private String email;
 
-    @Column
     private String userPassword;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -35,8 +33,10 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String userLogin, String email, String userPassword, Set<Role> roles) {
-        this.userLogin = userLogin;
+    public User(String firstName, String lastName, int age, String email, String userPassword, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
         this.email = email;
         this.userPassword = userPassword;
         this.roles = roles;
@@ -50,12 +50,28 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getUserLogin() {
-        return userLogin;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {
@@ -94,7 +110,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userLogin;
+        return lastName;
     }
 
     @Override
