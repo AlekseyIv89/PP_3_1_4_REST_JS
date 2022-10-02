@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
 
-        //
+        //Начальное добавление USER и ADMIN в БД
         if (userDao.getAllUsers().size() < 2) {
             User user = new User("user",
                     "user@user.ru",
