@@ -2,43 +2,22 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
-import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
-
-        //Начальное добавление USER и ADMIN в БД
-        //В качестве логина используется e-mail
-        if (userDao.getAllUsers().size() < 2) {
-            User user = new User("Petr",
-                    "Petrov",
-                    25,
-                    "user@mail.ru",
-                    "user",
-                    Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
-
-            User admin = new User("Aleksey",
-                    "Ivanov",
-                    33,
-                    "admin@mail.ru",
-                    "admin",
-                    Stream.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")).collect(Collectors.toSet()));
-
-            createUser(user);
-            createUser(admin);
-        }
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -50,6 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void createUser(User user) {
+        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         userDao.createUser(user);
     }
 
@@ -68,6 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void editUser(long id, User user) {
+        user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         userDao.editUser(id, user);
     }
 
