@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
     private final UserService userService;
-
     private final PasswordEncoder passwordEncoder;
 
     public WebSecurityConfig(SuccessUserHandler successUserHandler,
