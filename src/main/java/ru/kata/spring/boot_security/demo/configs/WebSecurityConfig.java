@@ -71,13 +71,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //Начальное добавление USER и ADMIN в БД
         //В качестве логина используется e-mail
         if (userService.getAllUsers().size() < 2) {
-            User user = new User("Petr",
-                    "Petrov",
-                    25,
-                    "petrov@mail.ru",
-                    "user",
-                    Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
-
             User admin = new User("Aleksey",
                     "Ivanov",
                     33,
@@ -85,8 +78,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "admin",
                     Stream.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")).collect(Collectors.toSet()));
 
-            userService.createUser(user);
+            User user = new User("Petr",
+                    "Petrov",
+                    25,
+                    "petrov@mail.ru",
+                    "user",
+                    Stream.of(new Role("ROLE_USER")).collect(Collectors.toSet()));
+
             userService.createUser(admin);
+            userService.createUser(user);
         }
     }
 
