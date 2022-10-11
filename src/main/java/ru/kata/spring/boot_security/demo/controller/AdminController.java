@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,9 +18,10 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getAllUsers(ModelMap modelMap) {
+    public String getAllUsers(@AuthenticationPrincipal User admin, ModelMap modelMap) {
+        modelMap.addAttribute("admin", admin);
         modelMap.addAttribute("users", userService.getAllUsers());
-        return "users";
+        return "admin";
     }
 
     @GetMapping("/new")
