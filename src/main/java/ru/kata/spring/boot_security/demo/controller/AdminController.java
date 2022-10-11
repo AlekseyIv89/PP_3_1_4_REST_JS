@@ -21,16 +21,12 @@ public class AdminController {
     public String getAllUsers(@AuthenticationPrincipal User admin, ModelMap modelMap) {
         modelMap.addAttribute("admin", admin);
         modelMap.addAttribute("users", userService.getAllUsers());
+        modelMap.addAttribute("createUser", new User());
         return "admin";
     }
 
-    @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user) {
-        return "userCreate";
-    }
-
-    @PostMapping()
-    public String createUser(@ModelAttribute("user") User user) {
+    @PostMapping("/new")
+    public String createUser(@ModelAttribute("createUser") User user) {
         userService.createUser(user);
         return "redirect:/admin";
     }
