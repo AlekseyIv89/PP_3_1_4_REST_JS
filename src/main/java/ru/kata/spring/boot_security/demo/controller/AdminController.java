@@ -18,8 +18,8 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getAllUsers(@AuthenticationPrincipal User admin, ModelMap modelMap) {
-        modelMap.addAttribute("admin", admin);
+    public String getAllUsers(@AuthenticationPrincipal User user, ModelMap modelMap) {
+        modelMap.addAttribute("user", user);
         modelMap.addAttribute("users", userService.getAllUsers());
         modelMap.addAttribute("createUser", new User());
         return "admin";
