@@ -1,17 +1,101 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="https://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
+    <title>User page</title>
 </head>
 <body>
-    <h3><a th:href="@{/logout}">Выход</a></h3>
+<header>
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <div class="collapse navbar-collapse" id="user">
+                        <ul class="navbar-nav mr-auto">
+                            <a class="navbar-brand font-weight-bold ml-2 mr-1" th:text="${user.getEmail()}">E-mail</a>
+                            <a class="navbar-brand mr-1">with roles:</a>
+                            <a class="navbar-brand mr-1" th:text="${#strings.listJoin(user.getRoles(), ' ')}">role</a>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-right" th:href="@{/logout}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
 
-    <h1 th:text="'User ' + ${user.getUsername()} + ', welcome spring boot security page!'">
-        User, welcome spring boot security page!
-    </h1>
+<div class="container-fluid">
+    <div class="row">
+        <!--Sidebar START-->
+        <div class="col-2 sidebar-sticky pt-4 px-0 bg-white d-flex flex-column">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#userPanel">User</a>
+                </li>
+            </ul>
+        </div>
+        <!--Sidebar END-->
 
+        <!--Users info table START-->
+        <div class="col-10 bg-light pt-3 d-flex flex-column">
+            <div class="tab-content vh-100">
+                <!--User panel START-->
+                <div class="tab-pane show active fade pt-3 px-4" id="userPanel">
+                    <h1>User information-page</h1>
+                    <div class="card">
+                        <h5 class="card-header">About user</h5>
+                        <div class="card-body text-center">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${user.getId()}">ID</td>
+                                    <td th:text="${user.getFirstName()}">First Name</td>
+                                    <td th:text="${user.getLastName()}">Last Name</td>
+                                    <td th:text="${user.getAge()}">Age</td>
+                                    <td th:text="${user.getEmail()}">Email</td>
+                                    <td th:text="${#strings.listJoin(user.getRoles(), ' ')}">Role</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--User panel END-->
+            </div>
+        </div>
+        <!--Users info table END-->
+    </div>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 </body>
 </html>

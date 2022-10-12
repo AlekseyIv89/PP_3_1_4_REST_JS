@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.Collections;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -34,6 +36,7 @@ public class AdminController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute User user, @PathVariable("id") long id) {
         System.out.println(user);
+        System.out.println(userService.getUser(id));
         userService.editUser(id, user);
         return "redirect:/admin";
     }

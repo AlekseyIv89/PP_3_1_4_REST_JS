@@ -13,7 +13,6 @@ public class UserController {
     @GetMapping
     public String showUserInfo(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("createUser", new User());
-        return "admin";
+        return "user";
     }
 }

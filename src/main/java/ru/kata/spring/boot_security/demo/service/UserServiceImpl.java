@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void editUser(long id, User user) {
-        System.out.println(user);
+
         if (!user.getUserPassword().equals(getUser(id).getUserPassword())) {
             user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         }
