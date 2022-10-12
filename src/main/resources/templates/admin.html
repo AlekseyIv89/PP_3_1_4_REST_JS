@@ -40,8 +40,7 @@
 
     <div class="container-fluid">
         <div class="row">
-
-            <!--Sidebar-->
+            <!--Sidebar START-->
             <div class="col-2 sidebar-sticky pt-4 px-0 bg-white d-flex flex-column">
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
@@ -52,12 +51,12 @@
                     </li>
                 </ul>
             </div>
+            <!--Sidebar END-->
 
-            <!--Users info table-->
+            <!--Users info table START-->
             <div class="col-10 bg-light pt-3 d-flex flex-column">
                 <div class="tab-content vh-100">
-
-                    <!--Admin panel-->
+                    <!--Admin panel START-->
                     <div class="tab-pane fade show active pt-3 px-4" id="adminPanel">
                         <h1>Admin panel</h1>
                         <ul class="nav nav-tabs">
@@ -69,8 +68,7 @@
                             </li>
                         </ul>
                         <div class="tab-content">
-
-                            <!--All users-->
+                            <!--All users START-->
                             <div class="tab-pane fade show active" id="allUsers">
                                 <div class="card">
                                     <h5 class="card-header">All users</h5>
@@ -98,11 +96,11 @@
                                                     <td th:text="${#strings.listJoin(user.getRoles(), ' ')}"></td>
                                                     <td>
                                                         <a class="btn btn-info" role="button" data-toggle="modal"
-                                                           data-target="#edit" th:attrappend="data-target=${user.getId()}">Edit</a>
+                                                           data-target="#editUser" th:attrappend="data-target=${user.getId()}">Edit</a>
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-danger" role="button" data-toggle="modal"
-                                                           data-target="#delete" th:attrappend="data-target=${user.getId()}">Delete</a>
+                                                           data-target="#deleteUser" th:attrappend="data-target=${user.getId()}">Delete</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -110,8 +108,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--All users END-->
 
-                            <!--New user-->
+                            <!--New user START-->
                             <div class="tab-pane fade" id="createUser">
                                 <div class="form-group">
                                     <div class="control-group required">
@@ -122,7 +121,7 @@
                                                     <form method="post" th:action="@{/admin/new}" th:object="${createUser}">
                                                         <p>
                                                             <label class="container-fluid font-weight-bold m-0" for="firstName">First name</label>
-                                                            <input class="form-control" th:field="*{firstName}" type="text" name="firstName" id="firstName" autofocus>
+                                                            <input class="form-control" th:field="*{firstName}" type="text" name="firstName" id="firstName" required autofocus>
                                                         </p>
                                                         <p>
                                                             <label class="container-fluid font-weight-bold m-0" for="lastName">Last name</label>
@@ -153,10 +152,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--New user END-->
                         </div>
                     </div>
+                    <!--Admin panel END-->
 
-                    <!--User panel-->
+                    <!--User panel START-->
                     <div class="tab-pane fade pt-3 px-4" id="userPanel">
                         <h1>User information-page</h1>
                         <div class="card">
@@ -187,11 +188,72 @@
                             </div>
                         </div>
                     </div>
+                    <!--User panel END-->
                 </div>
             </div>
-
+            <!--Users info table END-->
         </div>
     </div>
+
+    <!--Edit user START-->
+
+    <!--Edit user END-->
+
+    <!--Delete user START-->
+    <div th:each="deleteUser : ${users}">
+        <div class="modal fade" id="deleteUser" th:attrappend="id=${deleteUser.getId()}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form th:method="DELETE" th:action="@{/admin/{id}(id = ${deleteUser.getId()})}" th:object="${deleteUser}">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete user</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div class="form-group required">
+                                <div class="controls col-md-6 mx-auto">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="deleteId">ID</label>
+                                        <input class="form-control" type="number" name="id" id="deleteId" th:value="*{id}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="deleteFirstName">First name</label>
+                                        <input class="form-control" type="text" name="firstName" id="deleteFirstName" th:value="*{firstName}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="deleteLastName">Last name</label>
+                                        <input class="form-control" type="text" name="lastName" id="deleteLastName" th:value="*{lastName}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="deleteAge">Age</label>
+                                        <input class="form-control" type="number" name="age" id="deleteAge" th:value="*{age}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="deleteEmail">Email</label>
+                                        <input class="form-control" type="text" name="email" id="deleteEmail" th:value="*{email}" disabled>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold m-0" for="deleteRoles">Role</label>
+                                        <select class="form-control" name="roles" id="deleteRoles" size="2" disabled>
+                                            <option th:value="'ROLE_USER'">USER</option>
+                                            <option th:value="'ROLE_ADMIN'">ADMIN</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger btn btn-primary">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Delete user END-->
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
