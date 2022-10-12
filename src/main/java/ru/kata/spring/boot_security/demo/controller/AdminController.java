@@ -31,14 +31,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editUser(Model model, @PathVariable("id") long id) {
-        model.addAttribute("user", userService.getUser(id));
-        return "editUser";
-    }
-
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") long id) {
+    public String update(@ModelAttribute User user, @PathVariable("id") long id) {
+        System.out.println(user);
         userService.editUser(id, user);
         return "redirect:/admin";
     }

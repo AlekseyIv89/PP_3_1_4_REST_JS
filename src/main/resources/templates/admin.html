@@ -197,13 +197,69 @@
         </div>
     </div>
 
-    <!--Edit user START-->
+    <!--Edit user modal START-->
+    <div th:each="editUser : ${users}">
+        <div class="modal fade" id="editUser" data-backdrop="static" th:attrappend="id=${editUser.getId()}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form th:method="PATCH" th:action="@{/admin/{id}(id = ${editUser.getId()})}" th:object="${editUser}">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit user</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div class="form-group required">
+                                <div class="controls col-md-6 mx-auto">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="id">ID</label>
+                                        <input class="form-control" type="number" name="id" id="id" th:value="*{id}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="editFirstName">First name</label>
+                                        <input class="form-control" type="text" name="firstName" id="editFirstName" th:value="*{firstName}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="editLastName">Last name</label>
+                                        <input class="form-control" type="text" name="lastName" id="editLastName" th:value="*{lastName}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="editAge">Age</label>
+                                        <input class="form-control" type="number" name="age" id="editAge" th:value="*{age}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="editEmail">Email</label>
+                                        <input class="form-control" type="email" name="email" id="editEmail" th:value="*{email}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold m-0" for="editPassword">Password</label>
+                                        <input class="form-control" type="password" name="password" id="editPassword" th:value="*{userPassword}">
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold m-0" for="editRoles">Role</label>
+                                        <select class="form-control" name="roles" id="editRoles" th:value="*{roles}" required multiple size="2" >
+                                            <option th:value="'ROLE_USER'">USER</option>
+                                            <option th:value="'ROLE_ADMIN'">ADMIN</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Edit user modal END-->
 
-    <!--Edit user END-->
-
-    <!--Delete user START-->
+    <!--Delete user modal START-->
     <div th:each="deleteUser : ${users}">
-        <div class="modal fade" id="deleteUser" th:attrappend="id=${deleteUser.getId()}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal fade" id="deleteUser" data-backdrop="static" th:attrappend="id=${deleteUser.getId()}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <form th:method="DELETE" th:action="@{/admin/{id}(id = ${deleteUser.getId()})}" th:object="${deleteUser}">
@@ -255,7 +311,7 @@
             </div>
         </div>
     </div>
-    <!--Delete user END-->
+    <!--Delete user modal END-->
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
