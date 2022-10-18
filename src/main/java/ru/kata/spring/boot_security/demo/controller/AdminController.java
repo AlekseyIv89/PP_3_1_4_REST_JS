@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
 
@@ -30,7 +30,7 @@ public class AdminController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         userService.createUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
