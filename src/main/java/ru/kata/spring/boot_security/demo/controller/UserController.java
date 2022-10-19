@@ -14,7 +14,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 @RequestMapping("/user")
 public class UserController {
     @GetMapping
-    public ResponseEntity<User> showUserInfo(@AuthenticationPrincipal User user, Model model) {
+    public ResponseEntity<User> showUserInfo(@AuthenticationPrincipal User user) {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
