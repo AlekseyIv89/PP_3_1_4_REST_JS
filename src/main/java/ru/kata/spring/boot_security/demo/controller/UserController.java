@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.model.User;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
     @GetMapping
     public ResponseEntity<User> showUserInfo(@AuthenticationPrincipal User user) {

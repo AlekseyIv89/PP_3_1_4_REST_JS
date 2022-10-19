@@ -1,5 +1,5 @@
 async function thisUser() {
-    fetch("http://localhost:8080/user")
+    fetch("http://localhost:8080/api/v1/user")
         .then(res => res.json())
         .then(data => {
             // Добавляем информацию в шапку
