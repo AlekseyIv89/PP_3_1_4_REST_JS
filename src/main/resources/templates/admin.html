@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +26,7 @@
                             </ul>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link text-right" th:href="@{/logout}">Logout</a>
+                                    <a class="nav-link text-right" href="/logout">Logout</a>
                                 </li>
                             </ul>
                         </div>
@@ -125,8 +123,8 @@
                                                         <div class="form-group">
                                                             <label class="container-fluid font-weight-bold m-0" for="createUserRoles">Role</label>
                                                             <select class="form-control" id="createUserRoles" name="roles" required multiple size="2">
-                                                                <option th:value="'ROLE_USER'">USER</option>
-                                                                <option th:value="'ROLE_ADMIN'">ADMIN</option>
+                                                                <option value="ROLE_USER">USER</option>
+                                                                <option value="ROLE_ADMIN">ADMIN</option>
                                                             </select>
                                                         </div>
                                                         <button type="submit" class="btn btn-success btn-lg mt-3">Add new user</button>
@@ -212,8 +210,8 @@
                                 <div class="form-group mb-4">
                                     <label class="font-weight-bold m-0" for="rolesEditUser">Role</label>
                                     <select class="form-control" name="roles" id="rolesEditUser" required multiple size="2" >
-                                        <option th:value="'ROLE_USER'">USER</option>
-                                        <option th:value="'ROLE_ADMIN'">ADMIN</option>
+                                        <option value="ROLE_USER">USER</option>
+                                        <option value="ROLE_ADMIN">ADMIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -266,8 +264,8 @@
                                 <div class="form-group mb-4">
                                     <label class="font-weight-bold m-0" for="rolesDeleteUser">Role</label>
                                     <select class="form-control" name="roles" id="rolesDeleteUser" size="2" disabled>
-                                        <option th:value="'ROLE_USER'">USER</option>
-                                        <option th:value="'ROLE_ADMIN'">ADMIN</option>
+                                        <option value="'ROLE_USER'">USER</option>
+                                        <option value="'ROLE_ADMIN'">ADMIN</option>
                                     </select>
                                 </div>
                             </div>

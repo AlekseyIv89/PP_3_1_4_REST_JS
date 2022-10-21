@@ -27,8 +27,9 @@ public class AdminController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/info")
-    public ResponseEntity<User> getUser(@AuthenticationPrincipal User user) {
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
+        User user = userService.getUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

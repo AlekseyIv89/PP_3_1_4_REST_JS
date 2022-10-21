@@ -107,9 +107,6 @@ async function showEditModal(id) {
     form.lastName.value = user.lastName;
     form.age.value = user.age;
     form.email.value = user.email;
-    form.password.value = user.password;
-
-    $('#rolesEditUser').empty();
 }
 
 function editUser() {
@@ -122,6 +119,7 @@ function editUser() {
                 id : editForm.roles.options[i].value,
                 name : editForm.roles.options[i].name
             })
+            console.log(editUserRoles);
         }
 
         fetch("http://localhost:8080/api/v1/admin/" + editForm.id.value, {
