@@ -1,5 +1,5 @@
 $(async function() {
-    await thisUser();
+    // await thisUser();
     await allUsers();
     await createUser();
     editUser();
@@ -7,27 +7,27 @@ $(async function() {
 });
 const table = $('#tbodyAllUserTable');
 
-async function thisUser() {
-    fetch("http://localhost:8080/api/v1/user")
-        .then(res => res.json())
-        .then(data => {
-            // Добавляем информацию в шапку
-            $('#headerUsername').append(data.email);
-            let roles = data.roles.map(role => " " + role.role.substring(5));
-            $('#headerRoles').append(roles);
-
-            //Добавляем информацию в таблицу
-            let user = `$(
-            <tr>
-                <td>${data.id}</td>
-                <td>${data.firstName}</td>
-                <td>${data.lastName}</td>
-                <td>${data.age}</td>
-                <td>${data.email}</td>
-                <td>${roles}</td></tr>)`;
-            $('#userInfo').append(user);
-        })
-}
+// async function thisUser() {
+//     fetch("http://localhost:8080/api/v1/user")
+//         .then(res => res.json())
+//         .then(data => {
+//             // Добавляем информацию в шапку
+//             $('#headerUsername').append(data.email);
+//             let roles = data.roles.map(role => " " + role.role.substring(5));
+//             $('#headerRoles').append(roles);
+//
+//             //Добавляем информацию в таблицу
+//             let user = `$(
+//             <tr>
+//                 <td>${data.id}</td>
+//                 <td>${data.firstName}</td>
+//                 <td>${data.lastName}</td>
+//                 <td>${data.age}</td>
+//                 <td>${data.email}</td>
+//                 <td>${roles}</td></tr>)`;
+//             $('#userInfo').append(user);
+//         })
+// }
 
 async function allUsers() {
     table.empty()
@@ -68,17 +68,8 @@ async function createUser() {
         for (let i = 0; i < form.roles.options.length; i++) {
             if (form.roles.options[i].selected) newUserRoles.push({
                 role : form.roles.options[i].value
-                // role : form.roles.options[i].name
             })
         }
-        console.log(JSON.stringify({
-            firstName: form.firstName.value,
-            lastName: form.lastName.value,
-            age: form.age.value,
-            email: form.email.value,
-            userPassword: form.password.value,
-            roles: newUserRoles
-        }));
         fetch("http://localhost:8080/api/v1/admin", {
             method: 'POST',
             headers: {
@@ -124,10 +115,8 @@ function editUser() {
         let editUserRoles = [];
         for (let i = 0; i < editForm.roles.options.length; i++) {
             if (editForm.roles.options[i].selected) editUserRoles.push({
-                id : editForm.roles.options[i].value,
-                name : editForm.roles.options[i].name
+                role : editForm.roles.options[i].value
             })
-            console.log(editUserRoles);
         }
 
         fetch("http://localhost:8080/api/v1/admin/" + editForm.id.value, {
@@ -141,7 +130,7 @@ function editUser() {
                 lastName: editForm.lastName.value,
                 age: editForm.age.value,
                 email: editForm.email.value,
-                password: editForm.password.value,
+                userPassword: editForm.password.value,
                 roles: editUserRoles
             })
         }).then(() => {
