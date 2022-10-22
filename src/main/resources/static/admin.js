@@ -67,10 +67,18 @@ async function createUser() {
         let newUserRoles = [];
         for (let i = 0; i < form.roles.options.length; i++) {
             if (form.roles.options[i].selected) newUserRoles.push({
-                id : form.roles.options[i].value,
-                name : form.roles.options[i].name
+                role : form.roles.options[i].value
+                // role : form.roles.options[i].name
             })
         }
+        console.log(JSON.stringify({
+            firstName: form.firstName.value,
+            lastName: form.lastName.value,
+            age: form.age.value,
+            email: form.email.value,
+            userPassword: form.password.value,
+            roles: newUserRoles
+        }));
         fetch("http://localhost:8080/api/v1/admin", {
             method: 'POST',
             headers: {
@@ -81,7 +89,7 @@ async function createUser() {
                 lastName: form.lastName.value,
                 age: form.age.value,
                 email: form.email.value,
-                password: form.password.value,
+                userPassword: form.password.value,
                 roles: newUserRoles
             })
         }).then(() => {
