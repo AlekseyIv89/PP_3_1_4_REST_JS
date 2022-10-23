@@ -1,10 +1,35 @@
 $(async function() {
+    await thisUser();
     await allUsers();
     await createUser();
     editUser();
     deleteUser();
 });
 const table = $('#tbodyAllUserTable');
+
+async function thisUser() {
+    fetch("http://localhost:8080/api/v1/admin/info")
+        .then(res => res.json())
+        .then(data => {
+            // Добавляем информацию в шапку
+            $('#headerUsername').append(data.email);
+            let roles = data.roles.map(role => " " + role.role.substring(5));
+            $('#headerRoles').append(roles);
+
+            //Добавляем информацию в таблицу
+            let user = `$(
+            <tr>
+                <td>${data.id}</td>
+                <td>${data.firstName}</td>
+                <td>${data.lastName}</td>
+                <td>${data.age}</td>
+                <td>${data.email}</td>
+                <td>${roles}</td></tr>)`;
+
+            $('#userInfo').empty();
+            $('#userInfo').append(user);
+        })
+}
 
 async function allUsers() {
     table.empty()
@@ -113,6 +138,7 @@ function editUser() {
         }).then(() => {
             $('#editFormCloseButton').click();
             allUsers();
+            thisUser();
         })
     })
 }
