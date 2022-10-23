@@ -34,7 +34,7 @@ public class AdminController {
     }
 
     @GetMapping("/info")
-    public ResponseEntity<User> getUser(@AuthenticationPrincipal User user) {
+    public ResponseEntity<User> getAdminInfo(@AuthenticationPrincipal User user) {
         User user1 = userService.getUser(user.getId());
         return new ResponseEntity<>(user1, HttpStatus.OK);
     }
