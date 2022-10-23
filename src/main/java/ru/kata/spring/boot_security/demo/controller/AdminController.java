@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -31,12 +30,6 @@ public class AdminController {
     public ResponseEntity<User> getUser(@PathVariable("id") long id) {
         User user = userService.getUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @GetMapping("/info")
-    public ResponseEntity<User> getAdminInfo(@AuthenticationPrincipal User user) {
-        User user1 = userService.getUser(user.getId());
-        return new ResponseEntity<>(user1, HttpStatus.OK);
     }
 
     @PostMapping
