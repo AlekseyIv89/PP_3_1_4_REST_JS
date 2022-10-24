@@ -1,3 +1,7 @@
+$(async function() {
+    await thisUser();
+});
+
 async function thisUser() {
     fetch("http://localhost:8080/api/v1/user")
         .then(res => res.json())
@@ -20,7 +24,3 @@ async function thisUser() {
             $('#userInfo').append(user);
         })
 }
-
-$(async function() {
-    await thisUser();
-});
