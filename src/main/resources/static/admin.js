@@ -19,7 +19,7 @@ async function allUsers() {
                             <td>${user.lastName}</td>
                             <td>${user.age}</td>
                             <td>${user.email}</td>
-                            <td>${user.roles.map(role => " " + role.role.substring(5))}</td>
+                            <td>${user.roles.map(role => " " + role.role.substring(5)).join(' ')}</td>
                             <td>
                                 <button type="button" class="btn btn-info" data-toggle="modal" id="buttonEdit"
                                 data-action="edit" data-id="${user.id}" data-target="#edit">Edit</button>
@@ -78,11 +78,7 @@ $('#edit').on('show.bs.modal', ev => {
 async function showEditModal(id) {
     let user = await getUser(id);
     let form = document.forms["formEditUser"];
-    form.id.value = user.id;
-    form.firstName.value = user.firstName;
-    form.lastName.value = user.lastName;
-    form.age.value = user.age;
-    form.email.value = user.email;
+    userToModalForm(user, form);
 }
 
 function editUser() {
@@ -126,11 +122,7 @@ $('#delete').on('show.bs.modal', ev => {
 async function showDeleteModal(id) {
     let user = await getUser(id);
     let form = document.forms["formDeleteUser"];
-    form.id.value = user.id;
-    form.firstName.value = user.firstName;
-    form.lastName.value = user.lastName;
-    form.age.value = user.age;
-    form.email.value = user.email;
+    userToModalForm(user, form);
 }
 
 function deleteUser(){
@@ -149,8 +141,17 @@ function deleteUser(){
             })
     })
 }
+
 async function getUser(id) {
     let url = "http://localhost:8080/api/v1/admin/" + id;
     let response = await fetch(url);
     return await response.json();
+}
+
+function userToModalForm(user, form) {
+    form.id.value = user.id;
+    form.firstName.value = user.firstName;
+    form.lastName.value = user.lastName;
+    form.age.value = user.age;
+    form.email.value = user.email;
 }
